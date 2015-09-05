@@ -30,4 +30,6 @@ other parameters are as previous .
  
  just like the previous overload but you can also set the radius of the ripple . by default it would be 80px .
 
+The MIT License (MIT)
 
+Copyright (c) 2015 Parsoa Khorsand
