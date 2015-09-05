@@ -6,9 +6,9 @@ for the time being add the downloaded project as an external library in android 
 
 ### Usage 
 
-using the RippleView is pretty simple . there on static method _DrawRippleAtPosition_ with three overloaded variants .
+Using the RippleView is pretty simple . there are three overloads of the static method _DrawRippleAtPosition_ to handle different use scenarios :
 
-## public static void DrawRippleAtPosition(Activity context , View targetView , int colorID , ViewGroup rootLayout)
+## DrawRippleAtPosition(Activity context , View targetView , int colorID , ViewGroup rootLayout)
 
 _context_ : you need to pass a context in order to let the view inflate itself andaccess resources. pass the current activity (or if inside 
 a fragment the result of getActivity() )
@@ -26,7 +26,7 @@ _rippleCenterX , rippleCenterY_ : just in case you want the ripple to appear at 
 
 other parameters are as previous . 
 
- ## public static void DrawRippleAtPosition(Activity context , int rippleCenterX , int rippleCenterY ,int rippleRadius , int colorID , ViewGroup rootLayout)
+## DrawRippleAtPosition(Activity context , int rippleCenterX , int rippleCenterY ,int rippleRadius , int colorID , ViewGroup rootLayout)
  
  just like the previous overload but you can also set the radius of the ripple . by default it would be 80px .
 
