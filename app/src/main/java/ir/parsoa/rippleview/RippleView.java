@@ -24,7 +24,7 @@ public class RippleView extends View
 
     private static final String DEBUG_TAG = "RippleView" ;
 
-    private static final int maxRadius = 80 ;
+    private int maxRadius = 80 ;
 
     private float outerAlpha = 0 ;
     private float innerAlpha = 0 ;
@@ -46,6 +46,15 @@ public class RippleView extends View
     private Paint innerPaint ;
 
     // ========================================================================================== \\
+
+    public static void DrawRippleAtPosition(Activity context , int rippleCenterX , int rippleCenterY ,
+                                            int rippleRadius , int colorID , ViewGroup rootLayout)
+    {
+        RippleView rippleView = new RippleView(context);
+        rippleView.setRippleRadius(rippleRadius);
+        rootLayout.addView(rippleView);
+        rippleView.init(rippleCenterX , rippleCenterY , colorID) ;
+    }
 
     public static void DrawRippleAtPosition(Activity context , int rippleCenterX , int rippleCenterY , int colorID , ViewGroup rootLayout)
     {
@@ -244,6 +253,11 @@ public class RippleView extends View
         public boolean willChangeTransformationMatrix() {
             return false;
         }
+    }
+
+    public void setRippleRadius(int radius)
+    {
+        maxRadius = radius ;
     }
 
 }
