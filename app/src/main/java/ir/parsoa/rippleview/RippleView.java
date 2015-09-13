@@ -37,6 +37,8 @@ public class RippleView extends View
 
     private int rippleColorID ;
 
+    private RippleViewCallback callback ;
+
     private static final long RIPPLE_DURATION = 300 ;
 
     private Path outerPath = new Path() ;
@@ -48,24 +50,27 @@ public class RippleView extends View
     // ========================================================================================== \\
 
     public static void DrawRippleAtPosition(Activity context , int rippleCenterX , int rippleCenterY ,
-                                            int rippleRadius , int colorID , ViewGroup rootLayout)
+                                            int rippleRadius , int colorID , ViewGroup rootLayout ,
+                                            RippleViewCallback callback)
     {
-        RippleView rippleView = new RippleView(context);
+        RippleView rippleView = new RippleView(context , callback);
         rippleView.setRippleRadius(rippleRadius);
         rootLayout.addView(rippleView);
         rippleView.init(rippleCenterX , rippleCenterY , colorID) ;
     }
 
-    public static void DrawRippleAtPosition(Activity context , int rippleCenterX , int rippleCenterY , int colorID , ViewGroup rootLayout)
+    public static void DrawRippleAtPosition(Activity context , int rippleCenterX , int rippleCenterY ,
+                                            int colorID , ViewGroup rootLayout , RippleViewCallback callback)
     {
-        RippleView rippleView = new RippleView(context);
+        RippleView rippleView = new RippleView(context , callback);
         rootLayout.addView(rippleView);
         rippleView.init(rippleCenterX , rippleCenterY , colorID) ;
     }
 
-    public static void DrawRippleAtPosition(Activity context , View targetView , int colorID , ViewGroup rootLayout)
+    public static void DrawRippleAtPosition(Activity context , View targetView , int colorID ,
+                                            ViewGroup rootLayout , RippleViewCallback callback)
     {
-        RippleView rippleView = new RippleView(context);
+        RippleView rippleView = new RippleView(context , callback);
         rootLayout.addView(rippleView);
         int[] coordinates = new int[2] ;
         targetView.getLocationInWindow(coordinates);
@@ -83,9 +88,10 @@ public class RippleView extends View
 
     // ========================================================================================== \\
 
-    public RippleView(Context context)
+    public RippleView(Context context , RippleViewCallback callback)
     {
         super(context);
+        this.callback = callback ;
     }
 
     // ========================================================================================== \\
@@ -136,6 +142,10 @@ public class RippleView extends View
             @Override
             public void onAnimationEnd(Animation animation)
             {
+                if(callback != null)
+                {
+                    callback.onAnimationFinished();
+                }
                 ((ViewGroup) getParent()).removeView(RippleView.this);
             }
 
