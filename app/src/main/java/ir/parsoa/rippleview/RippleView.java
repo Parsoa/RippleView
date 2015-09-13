@@ -75,7 +75,7 @@ public class RippleView extends View
         int[] coordinates = new int[2] ;
         targetView.getLocationInWindow(coordinates);
         rippleView.init(coordinates[0] + targetView.getWidth() / 2,
-                coordinates[1] + targetView.getHeight() / 2 - getStatusBarHeight(context) , colorID) ;
+                coordinates[1] + targetView.getHeight() / 2 - getStatusBarHeight(context), colorID) ;
     }
 
     private static int getStatusBarHeight(Activity context)
@@ -142,11 +142,11 @@ public class RippleView extends View
             @Override
             public void onAnimationEnd(Animation animation)
             {
+                ((ViewGroup) getParent()).removeView(RippleView.this);
                 if(callback != null)
                 {
                     callback.onAnimationFinished();
                 }
-                ((ViewGroup) getParent()).removeView(RippleView.this);
             }
 
             @Override
